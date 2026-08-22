@@ -1,0 +1,1 @@
+{"security":{"ssl":false,"encodingKey":"asddkdgfhdjkhfaldfhlda"},"port":8080,"database":{"host":"localhost","username":"root","password":"ah43514351","dbname":"file_transfer_app","port":3306}}

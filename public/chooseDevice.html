@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/login.css">
+  <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+  <title>SyncRad | Choose Device</title>
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <img src="./assets/images/logo.png" alt="">
+      <h4 id="title">دستگاه فعلی را در فهرست انتخاب کنید</h4>
+      <select name="devices" id="devices">
+        <option value="" selected>دستگاه های شما</option>
+      </select>
+      <button class="btn btn-blue" id="newBoxToggler">افزودن دستگاه جدید</button>
+      <div class="new-device">
+        <input type="text" name="device-name" id="device-name" placeholder="نام دستگاه">
+        <select name="device-type" id="device-type">
+          <option value="0">نوع دستگاه</option>
+          <option value="1">تلفن همراه</option>
+          <option value="2">لپتاپ</option>
+          <option value="3">کامپیوتر</option>
+          <option value="4">تلویزیون</option>
+        </select>
+        <button class="btn btn-yellow" id="addDevice">افزودن</button>
+        <p class="error"></p>
+      </div>
+      <br>
+      <button class="btn btn-green" id="finish-login">ورود به پنل کاربری</button>
+    </div>
+  </div>
+  <script src="/assets/js/login.js"></script>
+</body>
+</html>

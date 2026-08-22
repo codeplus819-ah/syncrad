@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie": "^2.0.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "mysql2": "^3.17.1",
+    "socket.io": "^4.8.3",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "mysql": "^2.18.1"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
+  }
+}

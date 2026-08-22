@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/panel.css">
+  <title>پنل کاربری</title>
+</head>
+<body>
+  <header>
+    <span>
+      محل قرار گیری تبلیغات شما
+    </span>
+  </header>
+  <main>
+    <menu>
+      <img src="./assets/images/logo.png" alt="پروفایل">
+      <span id="username">نام کاربری: <span></span></span>
+      <span id="device">دستگاه فعلی: <span></span></span>
+      <span id="phone">تلفن همراه: <span></span></span>
+      <span id="phone">نسخه: <span>1.0 Beta</span></span>
+    </menu>
+    <div class="container">
+      <div id="proccess-bar-notif" class="hidden">
+        <div class="process-bar">
+          <div id="procceed">50%</div>
+        </div>
+        <div class="download-link"></div>
+      </div>
+      <div class="box" id="show">
+        <h1 class="title">مدیریت فایل ها</h1>
+        <div class="files-list">
+          <div class="controls">
+            <!--
+            <select id="finite">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="all">همه</option>
+            </select>
+            -->
+          </div>
+          <div class="files"></div>
+        </div>
+      </div>
+      <div class="box" id="new">
+        <h1 class="title">فایل جدید</h1>
+        <input type="text" id="filename" placeholder="نام مورد نظر شما">
+        <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+          <button id="choose" class="btn btn-blue">انتخاب فایل</button>
+          <span id="fileName">none</span>
+        </div>
+      </div>
+     <!-- <div class="box" id="update">
+        <h1 class="title">تغییر در فایل</h1>
+      </div> -->
+    </div>
+  </main>
+  <a href="#new" class="add">&plus;</a>
+  <footer>توجه:فایل شما ذخیره نمی شود.بلکه فقط مسیر ذخیره سازی فایل در دستگاه شما ذخیره می شود.از فایل شد نمی توانید به عنوان یک محفظه کلود استفاده کنید.</footer>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/assets/js/panel.js"></script>
+</body>
+</html>

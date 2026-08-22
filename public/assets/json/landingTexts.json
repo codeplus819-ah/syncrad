@@ -1,0 +1,38 @@
+{
+  "en": {
+    "brand": "Sync Rad",
+    "heroTitle": "Sync your files in a flash",
+    "heroDesc": "Ultra-fast, secure, and dead-simple file sharing.",
+    "heroCta": "Try now",
+    "ctaNav": "Get Started",
+    "featuresTitle": "Why Sync Rad?",
+    "feat1Title": "Lightning speed",
+    "feat1Desc": "Optimized servers for fastest syncing.",
+    "feat2Title": "Secure and private",
+    "feat2Desc": "End-to-end encryption. Your files stay yours.",
+    "feat3Title": "Start fast",
+    "feat3Desc": "Start syncing immediately, zero friction.",
+    "ctaTitle": "Ready to sync?",
+    "ctaDesc": "Join thousands who trust Sync Rad for their daily transfers.",
+    "ctaBottom": "Get started free",
+    "footer": "2026 Sync Rad"
+  },
+  "fa": {
+    "brand": "سینک راد",
+    "heroTitle": "فایل‌ها را در یک چشم‌برهم‌زدن همگام‌سازی کن",
+    "heroDesc": "انتقال فوق‌سریع، امن و بی‌دردسر.",
+    "heroCta": "امتحان کن",
+    "ctaNav": "شروع کنید",
+    "featuresTitle": "چرا سینک راد؟",
+    "feat1Title": "سرعت برق‌آسا",
+    "feat1Desc": "با الگوریتم به کار رفته در سرورما،به سریع ترین حالت ممکن فایل های خود را انتقال دهید",
+    "feat2Title": "امن و خصوصی",
+    "feat2Desc": "رمزگذاری سرتاسری. فایل‌ها فقط مال شماست.",
+    "feat3Title": "شروع سریع و بی دردسر",
+    "feat3Desc": "همین حالا شروع کنید، بدون هیچ مانعی.",
+    "ctaTitle": "آماده‌ای برای همگام‌سازی؟",
+    "ctaDesc": "به هزاران نفری بپیوندید که به سینک راد اعتماد دارند.",
+    "ctaBottom": "رایگان شروع کنید",
+    "footer": "۲۰۲۶ سینک راد"
+  }
+}
