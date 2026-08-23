@@ -2,8 +2,6 @@ const http = require('http');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const app = express();
-const server = http.createServer(app);
 const path = require('path');
 const cors = require('cors');
 const pool = require('./db');
@@ -11,18 +9,22 @@ const socketio = require('socket.io');
 const helmet = require('helmet');
 const cookie = require('cookie');
 const cookieParser = require('cookie-parser');
-const configLoader = require('./configLoader')
+const configLoader = require('./configLoader');
+const req = require('express/lib/request');
+
+const app = express();
+const server = http.createServer(app);
 
 app.use(cors());
-// app.use(helmet());
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
-        },
-    },
-}));
+app.use(helmet());
+// app.use(helmet({
+    // contentSecurityPolicy: {
+        // directives: {
+            // defaultSrc: ["'self'"],
+            // scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+        // },
+    // },
+// }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
@@ -214,7 +216,7 @@ app.get('/panel', async (req, res)=>{
     const token = req.cookies.mainSession;
     const [rows1] = await pool.query("SELECT * FROM `devices` WHERE `id`=?", [device_id,]);
     const [rows2] = await pool.query("SELECT * FROM `tokens` WHERE `value`=? AND `for_what`='complete-login'", [token,]);
-    if (rows1 && rows1.length > 0 && rows2 && rows2.length > 0) {
+    if (rows1 && rows1.length > 0 && rows2 && rows2.length > 0 && rows1[0].user_id == rows2[0].user_id) {
       const updated = await pool.query("UPDATE `tokens` SET `device_id`=? WHERE `value`=?", [device_id, token]);
       if (updated) {
         res.sendFile(path.join(__dirname, 'public', 'panel.html'))
@@ -222,6 +224,20 @@ app.get('/panel', async (req, res)=>{
         res.send("خطا در ارتباط با سرور")
       }
     } else {
+      res.cookie('session', '', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+        path: '/'
+      });
+      res.cookie('mainSession', '', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+        path: '/'
+      });
       res.redirect('/login');
     }
   } else {
@@ -284,6 +300,24 @@ app.post('/api/addFile', async (req, res)=>{
     return;
   }
   res.status(401).json({status: 'توکن منقضی شده است', redirect: '/login?m=توکن منقضی شده است'})
+});
+
+app.get('/logout', (req, res)=>{
+  res.cookie('session', '', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+    path: '/'
+  });
+  res.cookie('mainSession', '', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+    path: '/'
+  });
+  return res.redirect('/login');
 });
 
 app.get('/test', (req, res)=>{
