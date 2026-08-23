@@ -84,10 +84,10 @@ async function addDevice() {
       devicetype: deviceType
     })
   })
-  .then(res=>res.text())
+  .then(res=>res.json())
   .then(data=>{
     console.log(data);
-    getDevices()
+    window.location.reload();
   });
 }
 

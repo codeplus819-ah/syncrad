@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>گزارش باگ و نظرات</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/landing.css">
+    <link rel="stylesheet" href="./assets/css/comment.css">
+</head>
+<body>
+
+    <div class="container" style="padding-top: 12px;">
+        <div class="page-header">
+            <h1>
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M12 8v4" />
+                    <path d="M12 16h.01" />
+                </svg>
+                گزارش باگ و نظرات
+            </h1>
+            <p class="subtitle">با ثبت گزارش‌ها و نظرات خود، به بهبود سایت کمک کنید.</p>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="tab1">ثبت گزارش باگ</button>
+                <button class="tab-btn" data-tab="tab2">نظرات کاربران</button>
+            </div>
+            
+            <div class="tab-content active" id="tab1">
+                <div class="report-form-wrapper">
+                    <h2>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        ثبت گزارش باگ
+                    </h2>
+                    <p class="form-desc">مشکل را دقیق توضیح دهید تا تیم ما سریع‌تر آن را برطرف کند.</p>
+
+                    <form id="bugReportForm">
+                        <div class="form-group">
+                            <label>عنوان مشکل <span class="required">*</span></label>
+                            <input type="text" id="bugTitle" placeholder="مثلاً: دکمه ثبت در موبایل کار نمی‌کند" required />
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>بخش مربوطه</label>
+                                <select id="bugSection">
+                                    <option value="صفحه اصلی">صفحه اصلی</option>
+                                    <option value="داشبورد">داشبورد</option>
+                                    <option value="پروفایل">پروفایل</option>
+                                    <option value="ثبت‌نام / ورود">ثبت‌نام / ورود</option>
+                                    <option value="سفارشات">سفارشات</option>
+                                    <option value="پنل مدیریت">پنل مدیریت</option>
+                                    <option value="سایر">سایر</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>مرورگر / دستگاه</label>
+                                <input type="text" id="bugDevice" placeholder="مثلاً: Chrome / Android" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>اولویت مشکل</label>
+                            <div class="priority-tags" id="priorityTags">
+                                <span class="priority-tag p-high" data-value="بالا">بالا</span>
+                                <span class="priority-tag p-medium active-priority" data-value="متوسط">متوسط</span>
+                                <span class="priority-tag p-low" data-value="پایین">پایین</span>
+                            </div>
+                            <input type="hidden" id="bugPriority" value="متوسط" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>شرح کامل مشکل <span class="required">*</span></label>
+                            <textarea id="bugDescription" placeholder="لطفاً مشکل را با جزئیات توضیح دهید..." required></textarea>
+                            <div class="char-count"><span id="charCount">0</span> / 500 کاراکتر</div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 8px;">
+                            <label>
+                                <input type="checkbox" id="bugAttachLog" style="width: auto; margin-left: 6px;" />
+                                فایل لاگ یا اسکرین‌شات ضمیمه دارم (اختیاری)
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">ارسال گزارش</button>
+                            <button type="reset" class="btn-reset">پاک کردن</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab2">
+                <div class="comments-section">
+                    <div class="comments-header">
+                        <h2>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            نظرات کاربران
+                            <span class="badge-count" id="commentCount">0</span>
+                        </h2>
+                        <div>
+                            <button class="btn-outline" style="padding: 8px 20px; font-size:0.9rem;" id="sortCommentsBtn">
+                                مرتب‌سازی: جدیدترین
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="comment-list" id="commentList">
+                    </div>
+
+                    <div class="comment-form-simple">
+                        <h3>ثبت نظر جدید</h3>
+                        <form id="newCommentForm">
+                            <div class="form-row-inline">
+                                <div class="form-group">
+                                    <input type="text" id="commentName" placeholder="نام شما *" required style="width:100%;" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="commentEmail" placeholder="ایمیل (اختیاری)" style="width:100%;" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="commentText" placeholder="نظر یا گزارش خود را بنویسید..." required style="min-height:70px;"></textarea>
+                            </div>
+                            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                                <button type="submit" class="btn-primary" style="padding: 10px 32px;">ارسال نظر</button>
+                                <span style="font-size:0.85rem; color:var(--gray);">نظرات پس از تایید نمایش داده می‌شوند.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 20px;">
+            <p>۱۴۰۵ - تمامی حقوق محفوظ است. | برای گزارش باگ‌های فنی از این صفحه استفاده کنید.</p>
+        </footer>
+    </div>
+
+    <div class="toast-message" id="toastMessage"></div>
+    <script src="./assets/js/comment.js"></script>
+</body>
+</html>

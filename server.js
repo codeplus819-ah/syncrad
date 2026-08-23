@@ -320,10 +320,13 @@ app.get('/logout', (req, res)=>{
   return res.redirect('/login');
 });
 
+app.get('/comment', (req, res)=>{
+  return res.sendFile(path.join(__dirname, 'public', 'comment.html'));
+});
+
 app.get('/test', (req, res)=>{
   res.send('test')
 });
-
 io.on('connection', async (socket)=>{
   const cookieHeader = socket.handshake.headers.cookie;
   if (!cookieHeader) { return socket.disconnect(); }
@@ -333,6 +336,7 @@ io.on('connection', async (socket)=>{
   if (rows && rows.length > 0) {
     const user_id = rows[0].user_id;
     const device_id = rows[0].device_id;
+    const [users] = await pool.query("SELECT * FROM `users` WHERE `id`=?;", [user_id,]);
     const added = await pool.query("INSERT INTO `socket_connections`(`user_id`, `device_id`, `socket_id`) VALUES (?,?,?)", [user_id, device_id, socket.id]);
     if (added) {
       socket.joinedRoom = user_id;
