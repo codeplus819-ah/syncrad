@@ -228,14 +228,14 @@ app.get('/panel', async (req, res)=>{
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+        maxAge: 0,
         path: '/'
       });
       res.cookie('mainSession', '', {
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+        maxAge: 0,
         path: '/'
       });
       res.redirect('/login');
@@ -307,14 +307,14 @@ app.get('/logout', (req, res)=>{
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
-    expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+    maxAge: 0,
     path: '/'
   });
   res.cookie('mainSession', '', {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
-    expires: new Date(Date.now() - 360000000000000000000000000000000000000000000000000000000000),
+    maxAge: 0,
     path: '/'
   });
   return res.redirect('/login');
