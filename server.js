@@ -110,7 +110,7 @@ app.post('/api/login', async (req, res)=>{
           if (added) {
             res.cookie('session', token, {
               httpOnly: true,
-              secure: true,
+              secure: configs.security.ssl,
               sameSite: 'strict',
               maxAge: 1000*60*15
             });
@@ -142,7 +142,7 @@ app.get('/choose-device', async (req, res)=>{
         if (added) {
           res.cookie('mainSession', token, {
             httpOnly: true,
-            secure: true,
+            secure: configs.security.ssl,
             sameSite: 'strict',
             maxAge: 1000*60*60,
             path: '/'
@@ -226,14 +226,14 @@ app.get('/panel', async (req, res)=>{
     } else {
       res.cookie('session', '', {
         httpOnly: true,
-        secure: true,
+        secure: configs.security.ssl,
         sameSite: 'strict',
         maxAge: 0,
         path: '/'
       });
       res.cookie('mainSession', '', {
         httpOnly: true,
-        secure: true,
+        secure: configs.security.ssl,
         sameSite: 'strict',
         maxAge: 0,
         path: '/'
@@ -305,14 +305,14 @@ app.post('/api/addFile', async (req, res)=>{
 app.get('/logout', (req, res)=>{
   res.cookie('session', '', {
     httpOnly: true,
-    secure: true,
+    secure: configs.security.ssl,
     sameSite: 'strict',
     maxAge: 0,
     path: '/'
   });
   res.cookie('mainSession', '', {
     httpOnly: true,
-    secure: true,
+    secure: configs.security.ssl,
     sameSite: 'strict',
     maxAge: 0,
     path: '/'
