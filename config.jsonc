@@ -1,6 +1,6 @@
 {
   "security":{
-    "ssl":false,
+    "ssl":true,
     "encodingKey":"asddkdgfhdjkhfaldfhlda"
   },
   "port":8080,

@@ -65,7 +65,7 @@ app.post('/api/register', async (req, res)=>{
         await pool.query("INSERT INTO `tokens`(`user_id`, `device_id`, `for_what`, `value`, `ip`, `expires_at`) VALUES (?,?,?,?,?,DATE_ADD(NOW(), INTERVAL 15 MINUTE))", [userId, 0, 'login', token, ip]);
         res.cookie('session', token, {
           httpOnly: true,
-          secure: true,
+          secure: configs.security.ssl,
           sameSite: 'strict',
           maxAge: 1000*60*15
         }
