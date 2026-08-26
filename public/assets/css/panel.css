@@ -152,6 +152,37 @@ menu span span {
 #proccess-bar-notif.hidden {
   display: none;
 }
+
+.notif {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  max-width: 90%;
+  background: #fff;
+  border-radius: 32px;
+  padding: 32px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid #f7d8c4;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.96);
+  text-align: center;
+}
+
+.notif>.title, .notif>.description, .notif>.btns{
+  padding: 10px;
+}
+
+.notif>.title{
+  font-size: 1.5em;
+}
+
+.notif.hidden {
+  display: none;
+}
+
 .process-bar {
   width: 100%;
   height: 14px;

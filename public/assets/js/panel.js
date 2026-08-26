@@ -6,6 +6,28 @@ let isReceivingFile = false;
 let receivingFileInfo = {};
 let receivedSize = 0;
 
+function showNotif(title, description, ...btns) {
+  console.log(1);
+  
+  const notif = document.querySelector('.notif');
+  if (notif.classList.contains('hidden')) notif.classList.remove('hidden');
+  document.querySelector('.notif .title').textContent = title;
+  document.querySelector('.notif .description').textContent = description;
+  const btnsBox = document.querySelector('.notif .btns');
+  btnsBox.innerHTML = '';
+  btns.forEach((btn)=>{
+    btnsBox.innerHTML += `
+      <button id='${btn.id}' class='${btn.class}'>${btn.text}</button>
+    `;
+    document.getElementById(btn.id).addEventListener('click', btn.callback);
+  });
+}
+
+function hideNotif() {
+  const notif = document.querySelector('.notif');
+  if (!notif.classList.contains('hidden')) notif.classList.add('hidden');
+}
+
 function setSendFilePermision() {
   if (isReceivingFile == false) {
     document.querySelectorAll('.send').forEach(e=>{
@@ -67,7 +89,7 @@ async function getFiles() {
           <div class="filename">${e.file_name}</div>
           <input type="hidden" class="idb-key" value="${e.idb_key}">
           <div class="controls">
-            ${!await get(e.idb_key) ? "" : `<button class='btn btn-blue send'>&uparrow;</button>`}
+            ${!await get(e.idb_key) ? "<button class='btn btn-blue request'>&downarrow;</button>" : `<button class='btn btn-blue send'>&uparrow;</button>`}
             <!-- <button class="btn btn-red">&times;</button> -->
             <!-- <button class="btn btn-yellow">&#8635;</button> -->
           </div>
@@ -76,6 +98,9 @@ async function getFiles() {
         document.querySelector('.files').innerHTML += fileElement;
         if (document.querySelector(`#f${e.id} .send`)) {
           document.querySelector(`#f${e.id} .send`).addEventListener('click', ()=>sendFile(e.idb_key));
+        }
+        if (document.querySelector(`#f${e.id} .request`)) {
+          document.querySelector(`#f${e.id} .request`).addEventListener('click', ()=>requestFile(e.idb_key));
         }
       }
     }
@@ -119,6 +144,10 @@ function readChunkAsArrayBuffer(chunk) {
     reader.onerror = () => reject(reader.error);
     reader.readAsArrayBuffer(chunk);
   });
+}
+
+async function requestFile(idbkey) {
+  socket.emit('request:file', { idbkey })
 }
 
 async function sendFile(idbKey) {
@@ -245,4 +274,18 @@ socket.on('sending:end', (data) => {
       downloadContainer.innerHTML = '';
     }
   }, 10000);
+});
+
+socket.on('request:file', async (msg)=>{
+  const {idbkey, device, name} = msg;
+  console.log(msg);
+  console.log(await keys());
+  const ikeys = await keys();
+  if (ikeys.includes(idbkey)) {
+    console.log(1);
+    showNotif(`درخواست فایل ${name}`, `دستگاه ${device} شما درخواست فایلی را دارد،اجازه ارسال میدهید؟`, 
+      { id: 'b-1', class: 'btn btn-red', callback: hideNotif, text: 'رد' },
+      { id: 'b-2', class: 'btn btn-green', callback: ()=>{ hideNotif();sendFile(idbkey); }, text: 'تایید' },
+    );
+  }
 });

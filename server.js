@@ -80,7 +80,6 @@ app.post('/api/register', async (req, res)=>{
   }
 });
 
-
 app.get('/login', (req, res) => {
   if (!req.cookies.session && !req.cookies.mainSession) {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
@@ -333,9 +332,11 @@ io.on('connection', async (socket)=>{
   const cookies = cookie.parseCookie(cookieHeader);
   const token = cookies.mainSession;
   const [rows] = await pool.query("SELECT * FROM `tokens` WHERE `value`=? AND `expires_at`>NOW();", [String(token),]);
+  let user_id;
+  let device_id
   if (rows && rows.length > 0) {
-    const user_id = rows[0].user_id;
-    const device_id = rows[0].device_id;
+    user_id = rows[0].user_id;
+    device_id = rows[0].device_id;
     const [users] = await pool.query("SELECT * FROM `users` WHERE `id`=?;", [user_id,]);
     const added = await pool.query("INSERT INTO `socket_connections`(`user_id`, `device_id`, `socket_id`) VALUES (?,?,?)", [user_id, device_id, socket.id]);
     if (added) {
@@ -361,6 +362,22 @@ io.on('connection', async (socket)=>{
 
   socket.on('sending:error', (error) => {
     socket.to(socket.joinedRoom).emit('sending:error', error);
+  });
+
+  socket.on('request:file', async (msg)=>{
+    console.log('r');
+    const [files] = await pool.query('SELECT * FROM `file_locations` WHERE `idb_key` = ?', [msg.idbkey]);
+    if (files && files.length > 0) {
+      const [devices] = await pool.query('SELECT * FROM `devices` WHERE `id` = ?', [device_id]);
+      if (devices && devices.length > 0) {
+        const message = { idbkey: msg.idbkey };
+        message.device = devices[0].device_name;
+        message.name = files[0].file_name;
+        socket.to(socket.joinedRoom).emit('request:file', message);
+      } else {
+        socket.disconnect();
+      }
+    }
   });
 
   socket.on("disconnect", async ()=>{
