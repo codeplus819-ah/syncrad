@@ -16,15 +16,44 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors());
-app.use(helmet());
-// app.use(helmet({
-    // contentSecurityPolicy: {
-        // directives: {
-            // defaultSrc: ["'self'"],
-            // scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
-        // },
-    // },
-// }));
+// app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+
+        scriptSrc: [
+          "'self'",
+          "https://*.aiocom.io",
+          "https://*.alocom.co",
+        ],
+
+        connectSrc: [
+          "'self'",
+          "https://*.aiocom.io",
+          "wss://*.aiocom.io",
+          "https://*.alocom.co",
+          "wss://*.alocom.co",
+        ],
+
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://*.aiocom.io",
+          "https://*.alocom.co",
+        ],
+
+        fontSrc: [
+          "'self'",
+          "data:",
+          "https://*.aiocom.io",
+          "https://*.alocom.co",
+        ]
+      }
+    }
+  })
+);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());

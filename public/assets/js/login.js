@@ -1,3 +1,13 @@
+function ls() {
+  var aio_s = document.createElement('script');
+  aio_s.src = 'https://widgets.aiocom.io/iframeInjector.js?v=' + new Date().getTime();
+  aio_s.setAttribute('data-workspace', 716);
+  aio_s.id='aiocom-script';
+  aio_s.async=true;
+  document.body.appendChild(aio_s);
+}
+ls();
+
 async function login() {
   const recivedUsername = String(document.getElementById('username').value);
   const recivedPassword = String(document.getElementById('password').value);
