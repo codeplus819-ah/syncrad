@@ -39,13 +39,13 @@ Files are transferred between connected devices without being stored as cloud fi
 First, clone the Syncrad repository:
 
 ```bash
-git clone <YOUR-REPOSITORY-URL>
+git clone https://github.com/codeplus819-ah/syncrad.git
 ```
 
 Then enter the project directory:
 
 ```bash
-cd Syncrad
+cd syncrad
 ```
 
 ### 2. Install dependencies
@@ -87,7 +87,7 @@ Make sure the configuration contains the correct values for your database connec
 After installing the dependencies, setting up the database, and configuring `config.jsonc`, start the project:
 
 ```bash
-npm start
+node server
 ```
 
 If your project uses a different start command, replace the command above with the appropriate command for your setup.
