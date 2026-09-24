@@ -96,4 +96,7 @@ If your project uses a different start command, replace the command above with t
 
 Syncrad is free and open-source software licensed under the **GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)**.
 
-Copyright © 2026 AHM.
+Copyright (c) 2026 Amir Hosseyn Moeini (syncrad)
+
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
+See the [LICENSE](./LICENSE) file for details.
